@@ -76,7 +76,7 @@
             this.loginButton.TabIndex = 4;
             this.loginButton.Text = "button1";
             this.loginButton.UseVisualStyleBackColor = true;
-            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            this.loginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
             // LoginForm
             // 
@@ -89,7 +89,7 @@
             this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.label1);
             this.Name = "LoginForm";
-            this.Text = "Form1";
+            this.Text = "HotelSys";
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

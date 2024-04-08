@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HotelReservationSystem.EntityCRUD
 {
-    public interface CRUD<T>
+    public interface ICRUD<T>
     {
         void Create(T item);
 

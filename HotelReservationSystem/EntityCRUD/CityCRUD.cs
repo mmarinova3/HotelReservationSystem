@@ -7,7 +7,7 @@ using Oracle.ManagedDataAccess.Types;
 
 namespace HotelReservationSystem.EntityCRUD
 {
-    public class CityCRUD : CRUD<City>
+    public class CityCRUD : ICRUD<City>
     {
         public void Create(City item)
         {

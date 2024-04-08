@@ -13,7 +13,7 @@ namespace HotelReservationSystem.Forms
 {
     public partial class LoginForm : Form
     {
-        private UserController userController;
+        private readonly UserController userController;
 
         public LoginForm()
         {
@@ -28,7 +28,7 @@ namespace HotelReservationSystem.Forms
             loginButton.Text = "LogIn";
         }
 
-        private void loginButton_Click(object sender, EventArgs e)
+        private void LoginButton_Click(object sender, EventArgs e)
         {
             string username = usernameBox.Text;
             string password = passwordBox.Text;
@@ -38,6 +38,10 @@ namespace HotelReservationSystem.Forms
             if (isValidLogin)
             {
                 infoLabel.Text = "Login successful!";
+                MainViewForm mvf = new MainViewForm();
+                mvf.Show();
+                this.Hide();
+                
             }
             else
             {

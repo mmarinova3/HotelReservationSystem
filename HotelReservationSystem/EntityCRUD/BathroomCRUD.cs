@@ -7,7 +7,7 @@ using System;
 
 namespace HotelReservationSystem.EntityCRUD
 {
-    internal class BathroomCRUD : CRUD<Bathroom>
+    internal class BathroomCRUD : ICRUD<Bathroom>
     {
         public void Create(Bathroom item)
         {

@@ -7,7 +7,7 @@ using System.Data;
 
 namespace HotelReservationSystem.EntityCRUD
 {
-    public class RoomCategoryCRUD : CRUD<RoomCategory>
+    public class RoomCategoryCRUD : ICRUD<RoomCategory>
     {
         public void Create(RoomCategory item)
         {

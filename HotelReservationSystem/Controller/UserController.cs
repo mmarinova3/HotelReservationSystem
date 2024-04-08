@@ -10,7 +10,7 @@ namespace HotelReservationSystem.Controller
 {
     public class UserController
     {
-        private UserCRUD userCRUD;
+        private readonly UserCRUD userCRUD;
 
         public UserController()
         {
