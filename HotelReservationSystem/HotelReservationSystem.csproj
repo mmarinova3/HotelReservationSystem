@@ -83,6 +83,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityCRUD\BathroomCRUD.cs" />
+    <Compile Include="EntityCRUD\CityCRUD.cs" />
+    <Compile Include="EntityCRUD\CRUD.cs" />
+    <Compile Include="EntityCRUD\EmployeeCRUD.cs" />
+    <Compile Include="EntityCRUD\GuestCRUD.cs" />
+    <Compile Include="EntityCRUD\ReservationCRUD.cs" />
+    <Compile Include="EntityCRUD\ReservedRoomCRUD.cs" />
+    <Compile Include="EntityCRUD\RoomCategoryCRUD.cs" />
+    <Compile Include="EntityCRUD\RoomCRUD.cs" />
+    <Compile Include="EntityCRUD\UserCRUD.cs" />
     <Compile Include="Entity\Bathroom.cs" />
     <Compile Include="Entity\City.cs" />
     <Compile Include="Entity\Employee.cs" />
@@ -105,6 +115,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\DBConnection.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -147,8 +158,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controller\" />
-    <Folder Include="EntityCRUD\" />
-    <Folder Include="Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Text.Json.6.0.1\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.1\build\System.Text.Json.targets')" />
