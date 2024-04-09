@@ -3,7 +3,6 @@ using HotelReservationSystem.Utils;
 using System.Collections.Generic;
 using System.Data;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
 
 namespace HotelReservationSystem.EntityCRUD
 {
@@ -11,7 +10,7 @@ namespace HotelReservationSystem.EntityCRUD
     {
         public void Create(City item)
         {
-            string query = "INSERT INTO City (Name) VALUES (:cityName)";
+            string query = "INSERT INTO City (CityName) VALUES (:cityName)";
             OracleParameter[] parameters = {
                 new OracleParameter(":cityName", OracleDbType.Varchar2) { Value = item.CityName }
             };
@@ -20,7 +19,7 @@ namespace HotelReservationSystem.EntityCRUD
 
         public void Delete(int id)
         {
-            string query = "DELETE FROM City WHERE CityId = :cityId";
+            string query = "DELETE FROM City WHERE Id = :cityId";
             OracleParameter[] parameters = {
                 new OracleParameter(":cityId", OracleDbType.Int32) { Value = id }
             };
@@ -37,8 +36,8 @@ namespace HotelReservationSystem.EntityCRUD
             {
                 cities.Add(new City
                 {
-                    Id = int.Parse(row["CityId"].ToString()),
-                    CityName = row["Name"].ToString()
+                    Id = int.Parse(row["Id"].ToString()),
+                    CityName = row["CityName"].ToString()
                 });
             }
 
@@ -47,7 +46,7 @@ namespace HotelReservationSystem.EntityCRUD
 
         public City GetById(int id)
         {
-            string query = "SELECT * FROM City WHERE CityId = :cityId";
+            string query = "SELECT * FROM City WHERE Id = :cityId";
             OracleParameter[] parameters = {
                 new OracleParameter(":cityId", OracleDbType.Int32) { Value = id }
             };
@@ -59,8 +58,8 @@ namespace HotelReservationSystem.EntityCRUD
                 DataRow row = dataTable.Rows[0];
                 return new City
                 {
-                    Id = int.Parse(row["CityId"].ToString()),
-                    CityName = row["Name"].ToString()
+                    Id = int.Parse(row["Id"].ToString()),
+                    CityName = row["CityName"].ToString()
                 };
             }
             else
@@ -71,10 +70,10 @@ namespace HotelReservationSystem.EntityCRUD
 
         public void Update(int id, City updatedItem)
         {
-            string query = "UPDATE City SET Name = :newName WHERE CityId = :cityId";
+            string query = "UPDATE City SET CityName = :newName WHERE Id = :cityId";
             OracleParameter[] parameters = {
                 new OracleParameter(":newName", OracleDbType.Varchar2) { Value = updatedItem.CityName },
-                new OracleParameter(":cityId", OracleDbType.Int32) { Value = id }
+                new OracleParameter(":Id", OracleDbType.Int32) { Value = id }
             };
             DBConnection.ExecuteQuery(query, parameters);
         }

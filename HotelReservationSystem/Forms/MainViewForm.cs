@@ -21,5 +21,11 @@ namespace HotelReservationSystem.Forms
         {
 
         }
+
+        private void cityToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CityForm cityForm = new CityForm();
+                cityForm.Show();
+        }
     }
 }
