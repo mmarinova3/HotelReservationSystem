@@ -32,6 +32,9 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bathroomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.roomCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.employeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +58,10 @@
             // manageDataToolStripMenuItem
             // 
             this.manageDataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cityToolStripMenuItem});
+            this.cityToolStripMenuItem,
+            this.bathroomToolStripMenuItem,
+            this.roomCategoryToolStripMenuItem,
+            this.employeeToolStripMenuItem});
             this.manageDataToolStripMenuItem.Name = "manageDataToolStripMenuItem";
             this.manageDataToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
             this.manageDataToolStripMenuItem.Text = "Manage data";
@@ -66,6 +72,27 @@
             this.cityToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cityToolStripMenuItem.Text = "City";
             this.cityToolStripMenuItem.Click += new System.EventHandler(this.cityToolStripMenuItem_Click);
+            // 
+            // bathroomToolStripMenuItem
+            // 
+            this.bathroomToolStripMenuItem.Name = "bathroomToolStripMenuItem";
+            this.bathroomToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bathroomToolStripMenuItem.Text = "Bathroom";
+            this.bathroomToolStripMenuItem.Click += new System.EventHandler(this.bathroomToolStripMenuItem_Click);
+            // 
+            // roomCategoryToolStripMenuItem
+            // 
+            this.roomCategoryToolStripMenuItem.Name = "roomCategoryToolStripMenuItem";
+            this.roomCategoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.roomCategoryToolStripMenuItem.Text = "Room Category";
+            this.roomCategoryToolStripMenuItem.Click += new System.EventHandler(this.roomCategoryToolStripMenuItem_Click);
+            // 
+            // employeeToolStripMenuItem
+            // 
+            this.employeeToolStripMenuItem.Name = "employeeToolStripMenuItem";
+            this.employeeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.employeeToolStripMenuItem.Text = "Employee";
+            this.employeeToolStripMenuItem.Click += new System.EventHandler(this.employeeToolStripMenuItem_Click);
             // 
             // MainViewForm
             // 
@@ -90,5 +117,8 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cityToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bathroomToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem roomCategoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem employeeToolStripMenuItem;
     }
 }

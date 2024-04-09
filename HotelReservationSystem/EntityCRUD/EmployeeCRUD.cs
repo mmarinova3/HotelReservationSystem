@@ -11,7 +11,7 @@ namespace HotelReservationSystem.EntityCRUD
     {
         public void Create(Employee item)
         {
-            string query = "INSERT INTO Employee (Name, MobileNumber) VALUES (:name, :mobileNumber)";
+            string query = "INSERT INTO Employee (FullName, MobileNumber) VALUES (:name, :mobileNumber)";
             OracleParameter[] parameters = {
                 new OracleParameter(":name", OracleDbType.Varchar2) { Value = item.Name },
                 new OracleParameter(":mobileNumber", OracleDbType.Varchar2) { Value = item.MobileNumber }
@@ -22,7 +22,7 @@ namespace HotelReservationSystem.EntityCRUD
 
         public void Delete(int id)
         {
-            string query = "DELETE FROM Employee WHERE Id = :id";
+            string query = "DELETE FROM Employee WHERE EmployeeId = :id";
             OracleParameter[] parameters = {
                 new OracleParameter(":id", OracleDbType.Int32) { Value = id }
             };
@@ -40,8 +40,8 @@ namespace HotelReservationSystem.EntityCRUD
             {
                 employees.Add(new Employee
                 {
-                    Id = Convert.ToInt32(row["Id"]),
-                    Name = Convert.ToString(row["Name"]),
+                    Id = Convert.ToInt32(row["EmployeeId"]),
+                    Name = Convert.ToString(row["FullName"]),
                     MobileNumber = Convert.ToString(row["MobileNumber"])
                 });
             }
@@ -51,7 +51,7 @@ namespace HotelReservationSystem.EntityCRUD
 
         public Employee GetById(int id)
         {
-            string query = "SELECT * FROM Employee WHERE Id = :id";
+            string query = "SELECT * FROM Employee WHERE EmployeeId = :id";
             OracleParameter[] parameters = {
                 new OracleParameter(":id", OracleDbType.Int32) { Value = id }
             };
@@ -63,8 +63,8 @@ namespace HotelReservationSystem.EntityCRUD
                 DataRow row = dataTable.Rows[0];
                 return new Employee
                 {
-                    Id = Convert.ToInt32(row["Id"]),
-                    Name = Convert.ToString(row["Name"]),
+                    Id = Convert.ToInt32(row["EmployeeId"]),
+                    Name = Convert.ToString(row["FullName"]),
                     MobileNumber = Convert.ToString(row["MobileNumber"])
                 };
             }
@@ -76,7 +76,7 @@ namespace HotelReservationSystem.EntityCRUD
 
         public void Update(int id, Employee updatedItem)
         {
-            string query = "UPDATE Employee SET Name = :name, MobileNumber = :mobileNumber WHERE Id = :id";
+            string query = "UPDATE Employee SET FullName = :name, MobileNumber = :mobileNumber WHERE EmployeeId = :id";
             OracleParameter[] parameters = {
                 new OracleParameter(":name", OracleDbType.Varchar2) { Value = updatedItem.Name },
                 new OracleParameter(":mobileNumber", OracleDbType.Varchar2) { Value = updatedItem.MobileNumber },

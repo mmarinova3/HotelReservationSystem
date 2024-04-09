@@ -27,5 +27,23 @@ namespace HotelReservationSystem.Forms
             CityForm cityForm = new CityForm();
                 cityForm.Show();
         }
+
+        private void bathroomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BathroomForm bathroomForm = new BathroomForm();
+            bathroomForm.Show();
+        }
+
+        private void roomCategoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RoomCategoryForm roomCategoryForm = new RoomCategoryForm();
+            roomCategoryForm.Show();
+        }
+
+        private void employeeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EmployeeForm employeeForm = new EmployeeForm();
+            employeeForm.Show();
+        }
     }
 }

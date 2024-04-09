@@ -11,7 +11,7 @@ namespace HotelReservationSystem.EntityCRUD
     {
         public void Create(RoomCategory item)
         {
-            string query = "INSERT INTO RoomCategory (Name, MaxCapacity) VALUES (:name, :maxCapacity)";
+            string query = "INSERT INTO RoomCategory (CategoryName, MaxCapacity) VALUES (:name, :maxCapacity)";
             OracleParameter[] parameters = {
                 new OracleParameter(":name", OracleDbType.Varchar2) { Value = item.Name },
                 new OracleParameter(":maxCapacity", OracleDbType.Int32) { Value = item.MaxCapacity }
@@ -21,7 +21,7 @@ namespace HotelReservationSystem.EntityCRUD
 
         public void Delete(int id)
         {
-            string query = "DELETE FROM RoomCategory WHERE Id = :id";
+            string query = "DELETE FROM RoomCategory WHERE CategoryId = :id";
             OracleParameter[] parameters = {
                 new OracleParameter(":id", OracleDbType.Int32) { Value = id }
             };
@@ -38,8 +38,8 @@ namespace HotelReservationSystem.EntityCRUD
             {
                 roomCategories.Add(new RoomCategory
                 {
-                    Id = int.Parse(row["Id"].ToString()),
-                    Name = row["Name"].ToString(),
+                    Id = int.Parse(row["CategoryId"].ToString()),
+                    Name = row["CategoryName"].ToString(),
                     MaxCapacity = int.Parse(row["MaxCapacity"].ToString())
                 });
             }
@@ -49,7 +49,7 @@ namespace HotelReservationSystem.EntityCRUD
 
         public RoomCategory GetById(int id)
         {
-            string query = "SELECT * FROM RoomCategory WHERE Id = :id";
+            string query = "SELECT * FROM RoomCategory WHERE CategoryId = :id";
             OracleParameter[] parameters = {
                 new OracleParameter(":id", OracleDbType.Int32) { Value = id }
             };
@@ -61,8 +61,8 @@ namespace HotelReservationSystem.EntityCRUD
                 DataRow row = dataTable.Rows[0];
                 return new RoomCategory
                 {
-                    Id = int.Parse(row["Id"].ToString()),
-                    Name = row["Name"].ToString(),
+                    Id = int.Parse(row["CategoryId"].ToString()),
+                    Name = row["CategoryName"].ToString(),
                     MaxCapacity = int.Parse(row["MaxCapacity"].ToString())
                 };
             }
@@ -74,7 +74,7 @@ namespace HotelReservationSystem.EntityCRUD
 
         public void Update(int id, RoomCategory updatedItem)
         {
-            string query = "UPDATE RoomCategory SET Name = :name, MaxCapacity = :maxCapacity WHERE Id = :id";
+            string query = "UPDATE RoomCategory SET CategoryName = :name, MaxCapacity = :maxCapacity WHERE CategoryId = :id";
             OracleParameter[] parameters = {
                 new OracleParameter(":name", OracleDbType.Varchar2) { Value = updatedItem.Name },
                 new OracleParameter(":maxCapacity", OracleDbType.Int32) { Value = updatedItem.MaxCapacity },
