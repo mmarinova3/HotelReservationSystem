@@ -7,19 +7,19 @@ namespace HotelReservationSystem.Controller
 {
     public class GuestController
     {
-        ReservationCRUD guestCRUD;
+       GuestCRUD guestCRUD;
         public GuestController()
         {
-            guestCRUD = new ReservationCRUD();
+            guestCRUD = new GuestCRUD();
         }
 
-        public List<Reservation> GetGuests()
+        public List<Guest> GetGuests()
         {
-            List<Reservation> list = (List<Reservation>)guestCRUD.GetAll();
+            List<Guest> list = (List<Guest>)guestCRUD.GetAll();
             return list;
         }
 
-        public bool Save(Reservation guest)
+        public bool Save(Guest guest)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace HotelReservationSystem.Controller
             }
         }
 
-        public bool Update(int id, Reservation updatedGuest)
+        public bool Update(int id, Guest updatedGuest)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace HotelReservationSystem.Controller
             }
         }
 
-        public Reservation GetById(int id)
+        public Guest GetById(int id)
         {
             return guestCRUD.GetById(id);
         }

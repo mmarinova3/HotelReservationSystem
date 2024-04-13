@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelReservationSystem.Entity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,7 +26,7 @@ namespace HotelReservationSystem.Forms
         private void cityToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CityForm cityForm = new CityForm();
-                cityForm.Show();
+            cityForm.Show();
         }
 
         private void bathroomToolStripMenuItem_Click(object sender, EventArgs e)
@@ -44,6 +45,36 @@ namespace HotelReservationSystem.Forms
         {
             EmployeeForm employeeForm = new EmployeeForm();
             employeeForm.Show();
+        }
+
+        private void guestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GuestForm guestForm = new GuestForm();
+            guestForm.Show();
+        }
+
+        private void reservationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReservationForm reservationForm = new ReservationForm();
+            reservationForm.Show();
+        }
+
+        private void reservedRoomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReservedRoomForm reservedRoomForm = new ReservedRoomForm();
+            reservedRoomForm.Show();
+        }
+
+        private void roomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RoomForm roomForm = new RoomForm();
+            roomForm.Show();
+        }
+
+        private void userToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UserForm userForm = new UserForm();
+            userForm.Show();
         }
     }
 }
