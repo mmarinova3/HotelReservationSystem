@@ -11,8 +11,9 @@ namespace HotelReservationSystem.EntityCRUD
     {
         public void Create(Bathroom item)
         {
-            string query = "INSERT INTO Bathroom (FLOOR, ISHARED) VALUES (:floor, :isShared)";
+            string query = "INSERT INTO Bathroom (BATHROOMID, FLOOR, ISHARED) VALUES (:id, :floor, :isShared)";
             OracleParameter[] parameters = {
+                new OracleParameter(":BathroomId", OracleDbType.Int32) { Value = item.Id },
                 new OracleParameter(":floor", OracleDbType.Varchar2) { Value = item.Floor },
                 new OracleParameter(":isShared", OracleDbType.Boolean) { Value = item.IsShared }
     };
