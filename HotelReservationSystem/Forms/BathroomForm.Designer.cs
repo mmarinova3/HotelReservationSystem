@@ -36,7 +36,7 @@
             this.bathroomIdBox = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.floorBox = new System.Windows.Forms.TextBox();
-            this.isSharedComboBox = new System.Windows.Forms.ComboBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,9 +98,12 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(292, 309);
             this.dataGridView1.TabIndex = 7;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -112,20 +115,23 @@
             this.floorBox.Size = new System.Drawing.Size(121, 20);
             this.floorBox.TabIndex = 14;
             // 
-            // isSharedComboBox
+            // checkBox1
             // 
-            this.isSharedComboBox.FormattingEnabled = true;
-            this.isSharedComboBox.Location = new System.Drawing.Point(332, 91);
-            this.isSharedComboBox.Name = "isSharedComboBox";
-            this.isSharedComboBox.Size = new System.Drawing.Size(121, 21);
-            this.isSharedComboBox.TabIndex = 15;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(341, 91);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.TabIndex = 16;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // BathroomForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(510, 333);
-            this.Controls.Add(this.isSharedComboBox);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.floorBox);
             this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.searchButton);
@@ -153,6 +159,6 @@
         private System.Windows.Forms.TextBox bathroomIdBox;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox floorBox;
-        private System.Windows.Forms.ComboBox isSharedComboBox;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

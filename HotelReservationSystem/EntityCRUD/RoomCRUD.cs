@@ -11,8 +11,9 @@ namespace HotelReservationSystem.EntityCRUD
     {
         public void Create(Room item)
         {
-            string query = "INSERT INTO Room (Floor, RoomCategoryId, BathroomId) VALUES (:floor, :roomCategoryId, :bathroomId)";
+            string query = "INSERT INTO Room (RoomId,Floor, CategoryId, BathroomId) VALUES (:roomId, :floor, :roomCategoryId, :bathroomId)";
             OracleParameter[] parameters = {
+                new OracleParameter(":roomId", OracleDbType.Int32) { Value = item.Id },
                 new OracleParameter(":floor", OracleDbType.Int32) { Value = item.Floor },
                 new OracleParameter(":roomCategoryId", OracleDbType.Int32) { Value = item.RoomCategory.Id },
                 new OracleParameter(":bathroomId", OracleDbType.Int32) { Value = item.Bathroom.Id }
@@ -23,7 +24,7 @@ namespace HotelReservationSystem.EntityCRUD
 
         public void Delete(int id)
         {
-            string query = "DELETE FROM Room WHERE Id = :id";
+            string query = "DELETE FROM Room WHERE RoomId = :id";
             OracleParameter[] parameters = {
                 new OracleParameter(":id", OracleDbType.Int32) { Value = id }
             };
@@ -41,9 +42,9 @@ namespace HotelReservationSystem.EntityCRUD
             {
                 rooms.Add(new Room
                 {
-                    Id = Convert.ToInt32(row["Id"]),
+                    Id = Convert.ToInt32(row["RoomId"]),
                     Floor = Convert.ToInt32(row["Floor"]),
-                    RoomCategory = new RoomCategory { Id = Convert.ToInt32(row["RoomCategoryId"]) },
+                    RoomCategory = new RoomCategory { Id = Convert.ToInt32(row["CategoryId"]) },
                     Bathroom = new Bathroom { Id = Convert.ToInt32(row["BathroomId"]) }
                 });
             }
@@ -53,7 +54,7 @@ namespace HotelReservationSystem.EntityCRUD
 
         public Room GetById(int id)
         {
-            string query = "SELECT * FROM Room WHERE Id = :id";
+            string query = "SELECT * FROM Room WHERE RoomId = :id";
             OracleParameter[] parameters = {
                 new OracleParameter(":id", OracleDbType.Int32) { Value = id }
             };
@@ -65,9 +66,9 @@ namespace HotelReservationSystem.EntityCRUD
                 DataRow row = dataTable.Rows[0];
                 return new Room
                 {
-                    Id = Convert.ToInt32(row["Id"]),
+                    Id = Convert.ToInt32(row["RoomId"]),
                     Floor = Convert.ToInt32(row["Floor"]),
-                    RoomCategory = new RoomCategory { Id = Convert.ToInt32(row["RoomCategoryId"]) },
+                    RoomCategory = new RoomCategory { Id = Convert.ToInt32(row["CategoryId"]) },
                     Bathroom = new Bathroom { Id = Convert.ToInt32(row["BathroomId"]) }
                 };
             }
@@ -79,7 +80,7 @@ namespace HotelReservationSystem.EntityCRUD
 
         public void Update(int id, Room updatedItem)
         {
-            string query = "UPDATE Room SET Floor = :floor, RoomCategoryId = :roomCategoryId, BathroomId = :bathroomId WHERE Id = :id";
+            string query = "UPDATE Room SET Floor = :floor, CategoryId = :roomCategoryId, BathroomId = :bathroomId WHERE RoomId = :id";
             OracleParameter[] parameters = {
                 new OracleParameter(":floor", OracleDbType.Int32) { Value = updatedItem.Floor },
                 new OracleParameter(":roomCategoryId", OracleDbType.Int32) { Value = updatedItem.RoomCategory.Id },

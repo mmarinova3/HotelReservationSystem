@@ -33,7 +33,7 @@ namespace HotelReservationSystem.Controller
             }
         }
 
-        public bool Update(int id, Guest updatedGuest)
+        public bool Update(string id, Guest updatedGuest)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace HotelReservationSystem.Controller
             }
         }
 
-        public bool Delete(int id)
+        public bool Delete(string id)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace HotelReservationSystem.Controller
             }
         }
 
-        public Guest GetById(int id)
+        public Guest GetById(string id)
         {
             return guestCRUD.GetById(id);
         }

@@ -15,22 +15,45 @@ namespace HotelReservationSystem.Forms
     public partial class ReservedRoomForm : Form
     {
         private readonly ReservedRoomController reservedRoomController;
+        private readonly RoomController roomController;
+        private readonly ReservationController reservationController;
+
         private ReservedRoom selectedReservedRoom; 
 
         public ReservedRoomForm()
         {
-            selectedReservedRoom = new ReservedRoom();
+            reservedRoomController = new ReservedRoomController();
+            roomController = new RoomController();
+            reservationController = new ReservationController();
+
             InitializeComponent();
             DisplayData();
+            FillRoomComboBox();
+            FillReservationComboBox();
         }
 
         private void ReservedRoomForm_Load(object sender, EventArgs e)
         {
             insertButton.Text = "Insert";
-            editButton.Text = "Edit";
             deleteButton.Text = "Delete";
             searchButton.Text = "Search";
             infoLabel.Text = string.Empty;
+        }
+
+        private void FillRoomComboBox()
+        {
+            List<Room> rooms = roomController.GetRooms();
+            roomComboBox.DataSource = rooms;
+            roomComboBox.DisplayMember = "Id";
+            roomComboBox.ValueMember = "iD";
+        }
+
+        private void FillReservationComboBox()
+        {
+            List<Reservation> reservations = reservationController.GetReservations();
+            reservationComboBox.DataSource = reservations;
+            reservationComboBox.DisplayMember = "Id";
+            reservationComboBox.ValueMember = "Id";
         }
 
         public void DisplayData()
@@ -38,19 +61,76 @@ namespace HotelReservationSystem.Forms
             dataGridView1.DataSource = reservedRoomController.GetReservedRooms();
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridView1.Rows.Count)
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                int reservationId;
+                int roomId;
+
+                if (int.TryParse(row.Cells["reservationId"].Value.ToString(), out reservationId) && int.TryParse(row.Cells["roomId"].Value.ToString(), out roomId))
+                {
+                    selectedReservedRoom = reservedRoomController.GetById(reservationId, roomId);
+                    if (selectedReservedRoom != null)
+                    {
+                        reservationComboBox.SelectedValue = selectedReservedRoom.Reservation.Id;
+                        roomComboBox.SelectedValue = selectedReservedRoom.Room.Id;
+                        startDateTimePicker.Value = selectedReservedRoom.StartDate;
+                        endDateTimePicker.Value = selectedReservedRoom.EndDate;
+                    }
+                }
+            }
+        }
+
         private void insertButton_Click(object sender, EventArgs e)
         {
+            Reservation selectedReservation = (Reservation)reservationComboBox.SelectedItem;
+            Room selectedRoom = (Room)roomComboBox.SelectedItem;
 
+            ReservedRoom newReservedRoom = new ReservedRoom
+            {
+                Reservation = selectedReservation,
+                Room = selectedRoom,
+                StartDate = startDateTimePicker.Value,
+                EndDate = endDateTimePicker.Value
+            };
+
+            if (reservedRoomController.Save(newReservedRoom))
+            {
+                infoLabel.Text = "ReservedRoom saved successfully.";
+                DisplayData();
+            }
+            else
+            {
+                infoLabel.Text = "Failed to save ReservedRoom.";
+            }
         }
 
-        private void editButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
+      
         private void deleteButton_Click(object sender, EventArgs e)
         {
 
+            if (selectedReservedRoom != null)
+            {
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this ReservedRoom?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    if (reservedRoomController.Delete(selectedReservedRoom.Reservation.Id,selectedReservedRoom.Room.Id))
+                    {
+                        infoLabel.Text = "ReservedRoom deleted successfully.";
+                        DisplayData();
+                    }
+                    else
+                    {
+                        infoLabel.Text = "Failed to delete ReservedRoom.";
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a ReservedRoom to delete.", "No ReservedRoom Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void searchButton_Click(object sender, EventArgs e)
@@ -58,9 +138,6 @@ namespace HotelReservationSystem.Forms
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+       
     }
 }

@@ -7,7 +7,7 @@ using System.Data;
 
 namespace HotelReservationSystem.EntityCRUD
 {
-    public class GuestCRUD : ICRUD<Guest>
+    public class GuestCRUD 
     {
         public void Create(Guest item)
         {
@@ -23,11 +23,11 @@ namespace HotelReservationSystem.EntityCRUD
             DBConnection.ExecuteQuery(query, parameters);
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
-            string query = "DELETE FROM Guest WHERE Id = :id";
+            string query = "DELETE FROM Guest WHERE EGN = :id";
             OracleParameter[] parameters = {
-                new OracleParameter(":id", OracleDbType.Int32) { Value = id }
+                new OracleParameter(":id", OracleDbType.Varchar2) { Value = id }
             };
 
             DBConnection.ExecuteQuery(query, parameters);
@@ -44,8 +44,8 @@ namespace HotelReservationSystem.EntityCRUD
                 guests.Add(new Guest
                 {
                     EGN = Convert.ToString(row["EGN"]),
-                    Name = Convert.ToString(row["Name"]),
-                    City = new City { Id = Convert.ToInt32(row["CityId"]) },
+                    Name = Convert.ToString(row["FullName"]),
+                    City = new City { Id = Convert.ToInt32(row["CityId"])},
                     Address = Convert.ToString(row["Address"]),
                     MobileNumber = Convert.ToString(row["MobileNumber"])
                 });
@@ -54,11 +54,11 @@ namespace HotelReservationSystem.EntityCRUD
             return guests;
         }
 
-        public Guest GetById(int id)
+        public Guest GetById(string egn)
         {
-            string query = "SELECT * FROM Guest WHERE Id = :id";
+            string query = "SELECT * FROM Guest WHERE EGN = :egn";
             OracleParameter[] parameters = {
-                new OracleParameter(":id", OracleDbType.Int32) { Value = id }
+                new OracleParameter(":EGN", OracleDbType.Int32) { Value = egn }
             };
 
             DataTable dataTable = DBConnection.GetData(query, parameters);
@@ -69,7 +69,7 @@ namespace HotelReservationSystem.EntityCRUD
                 return new Guest
                 {
                     EGN = Convert.ToString(row["EGN"]),
-                    Name = Convert.ToString(row["Name"]),
+                    Name = Convert.ToString(row["FullName"]),
                     City = new City { Id = Convert.ToInt32(row["CityId"]) },
                     Address = Convert.ToString(row["Address"]),
                     MobileNumber = Convert.ToString(row["MobileNumber"])
@@ -81,16 +81,15 @@ namespace HotelReservationSystem.EntityCRUD
             }
         }
 
-        public void Update(int id, Guest updatedItem)
+        public void Update(string id, Guest updatedItem)
         {
-            string query = "UPDATE Guest SET EGN = :egn, Name = :name, CityId = :cityId, Address = :address, MobileNumber = :mobileNumber WHERE Id = :id";
+            string query = "UPDATE Guest SET Name = :name, CityId = :cityId, Address = :address, MobileNumber = :mobileNumber WHERE EGN = :id";
             OracleParameter[] parameters = {
-                new OracleParameter(":egn", OracleDbType.Varchar2) { Value = updatedItem.EGN },
-                new OracleParameter(":name", OracleDbType.Varchar2) { Value = updatedItem.Name },
+                new OracleParameter(":fullName", OracleDbType.Varchar2) { Value = updatedItem.Name },
                 new OracleParameter(":cityId", OracleDbType.Int32) { Value = updatedItem.City.Id },
                 new OracleParameter(":address", OracleDbType.Varchar2) { Value = updatedItem.Address },
                 new OracleParameter(":mobileNumber", OracleDbType.Varchar2) { Value = updatedItem.MobileNumber },
-                new OracleParameter(":id", OracleDbType.Int32) { Value = id }
+                new OracleParameter(":id", OracleDbType.Varchar2) { Value = id }
             };
 
             DBConnection.ExecuteQuery(query, parameters);

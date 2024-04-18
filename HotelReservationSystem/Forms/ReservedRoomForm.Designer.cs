@@ -34,7 +34,6 @@
             this.searchButton = new System.Windows.Forms.Button();
             this.infoLabel = new System.Windows.Forms.Label();
             this.deleteButton = new System.Windows.Forms.Button();
-            this.editButton = new System.Windows.Forms.Button();
             this.insertButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -66,7 +65,7 @@
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(476, 319);
+            this.searchButton.Location = new System.Drawing.Point(475, 303);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(100, 23);
             this.searchButton.TabIndex = 53;
@@ -85,7 +84,7 @@
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(476, 290);
+            this.deleteButton.Location = new System.Drawing.Point(475, 274);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(100, 23);
             this.deleteButton.TabIndex = 51;
@@ -93,19 +92,9 @@
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
-            // editButton
-            // 
-            this.editButton.Location = new System.Drawing.Point(476, 261);
-            this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(100, 23);
-            this.editButton.TabIndex = 50;
-            this.editButton.Text = "button2";
-            this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.editButton_Click);
-            // 
             // insertButton
             // 
-            this.insertButton.Location = new System.Drawing.Point(476, 232);
+            this.insertButton.Location = new System.Drawing.Point(475, 245);
             this.insertButton.Name = "insertButton";
             this.insertButton.Size = new System.Drawing.Size(100, 23);
             this.insertButton.TabIndex = 49;
@@ -115,9 +104,12 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(23, 28);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(378, 372);
             this.dataGridView1.TabIndex = 48;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -141,7 +133,6 @@
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.deleteButton);
-            this.Controls.Add(this.editButton);
             this.Controls.Add(this.insertButton);
             this.Controls.Add(this.dataGridView1);
             this.Name = "ReservedRoomForm";
@@ -161,7 +152,6 @@
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.Button deleteButton;
-        private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.Button insertButton;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DateTimePicker endDateTimePicker;

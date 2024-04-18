@@ -7,12 +7,13 @@ using System.Data;
 
 namespace HotelReservationSystem.EntityCRUD
 {
-    public class ReservedRoomCRUD : ICRUD<ReservedRoom>
+    public class ReservedRoomCRUD 
     {
         public void Create(ReservedRoom item)
         {
-            string query = "INSERT INTO ReservedRoom (RoomId, StartDate, EndDate) VALUES (:roomId, :startDate, :endDate)";
+            string query = "INSERT INTO Reserved_Room (ReservationId, RoomId, StartDate, EndDate) VALUES (:reservationId, :roomId, :startDate, :endDate)";
             OracleParameter[] parameters = {
+                new OracleParameter(":reservationId", OracleDbType.Int32) { Value = item.Reservation.Id },
                 new OracleParameter(":roomId", OracleDbType.Int32) { Value = item.Room.Id },
                 new OracleParameter(":startDate", OracleDbType.Date) { Value = item.StartDate },
                 new OracleParameter(":endDate", OracleDbType.Date) { Value = item.EndDate }
@@ -21,11 +22,12 @@ namespace HotelReservationSystem.EntityCRUD
             DBConnection.ExecuteQuery(query, parameters);
         }
 
-        public void Delete(int id)
+        public void Delete(int reservationId, int roomId)
         {
-            string query = "DELETE FROM ReservedRoom WHERE Id = :id";
+            string query = "DELETE FROM Reserved_Room WHERE ReservationId = :reservationId, RoomId = :roomId";
             OracleParameter[] parameters = {
-                new OracleParameter(":id", OracleDbType.Int32) { Value = id }
+                new OracleParameter(":reservationId", OracleDbType.Int32) { Value = reservationId },
+                new OracleParameter(":roomId", OracleDbType.Int32) { Value = roomId }
             };
 
             DBConnection.ExecuteQuery(query, parameters);
@@ -33,7 +35,7 @@ namespace HotelReservationSystem.EntityCRUD
 
         public IEnumerable<ReservedRoom> GetAll()
         {
-            string query = "SELECT * FROM ReservedRoom";
+            string query = "SELECT * FROM Reserved_Room";
             DataTable dataTable = DBConnection.GetData(query);
             List<ReservedRoom> reservedRooms = new List<ReservedRoom>();
 
@@ -41,7 +43,7 @@ namespace HotelReservationSystem.EntityCRUD
             {
                 reservedRooms.Add(new ReservedRoom
                 {
-                    Id = Convert.ToInt32(row["Id"]),
+                    Reservation = new Reservation { Id = Convert.ToInt32(row["ReservationId"]) },
                     Room = new Room { Id = Convert.ToInt32(row["RoomId"]) },
                     StartDate = Convert.ToDateTime(row["StartDate"]),
                     EndDate = Convert.ToDateTime(row["EndDate"])
@@ -51,11 +53,12 @@ namespace HotelReservationSystem.EntityCRUD
             return reservedRooms;
         }
 
-        public ReservedRoom GetById(int id)
+        public ReservedRoom GetById(int reservationId, int roomId)
         {
-            string query = "SELECT * FROM ReservedRoom WHERE Id = :id";
+            string query = "SELECT * FROM Reserved_Room WHERE ReservationId = :reservationId, RoomId = :roomId";
             OracleParameter[] parameters = {
-                new OracleParameter(":id", OracleDbType.Int32) { Value = id }
+                new OracleParameter(":reservationId", OracleDbType.Int32) { Value = reservationId },
+                new OracleParameter(":roomId", OracleDbType.Int32) { Value = roomId }
             };
 
             DataTable dataTable = DBConnection.GetData(query, parameters);
@@ -65,7 +68,7 @@ namespace HotelReservationSystem.EntityCRUD
                 DataRow row = dataTable.Rows[0];
                 return new ReservedRoom
                 {
-                    Id = Convert.ToInt32(row["Id"]),
+                    Reservation = new Reservation { Id = Convert.ToInt32(row["ReservationId"]) },
                     Room = new Room { Id = Convert.ToInt32(row["RoomId"]) },
                     StartDate = Convert.ToDateTime(row["StartDate"]),
                     EndDate = Convert.ToDateTime(row["EndDate"])
@@ -77,17 +80,5 @@ namespace HotelReservationSystem.EntityCRUD
             }
         }
 
-        public void Update(int id, ReservedRoom updatedItem)
-        {
-            string query = "UPDATE ReservedRoom SET RoomId = :roomId, StartDate = :startDate, EndDate = :endDate WHERE Id = :id";
-            OracleParameter[] parameters = {
-                new OracleParameter(":roomId", OracleDbType.Int32) { Value = updatedItem.Room.Id },
-                new OracleParameter(":startDate", OracleDbType.Date) { Value = updatedItem.StartDate },
-                new OracleParameter(":endDate", OracleDbType.Date) { Value = updatedItem.EndDate },
-                new OracleParameter(":id", OracleDbType.Int32) { Value = id }
-            };
-
-            DBConnection.ExecuteQuery(query, parameters);
-        }
     }
 }

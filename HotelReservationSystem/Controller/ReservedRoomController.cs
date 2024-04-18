@@ -34,25 +34,12 @@ namespace HotelReservationSystem.Controller
             }
         }
 
-        public bool Update(int id, ReservedRoom updatedReservedRoom)
-        {
-            try
-            {
-                reservedRoomCRUD.Update(id, updatedReservedRoom);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error updating Reserved Room: {ex.Message}");
-                return false;
-            }
-        }
 
-        public bool Delete(int id)
+        public bool Delete(int reservationId, int roomId)
         {
             try
             {
-                reservedRoomCRUD.Delete(id);
+                reservedRoomCRUD.Delete(reservationId, roomId);
                 return true;
             }
             catch (Exception ex)
@@ -62,9 +49,9 @@ namespace HotelReservationSystem.Controller
             }
         }
 
-        public ReservedRoom GetById(int id)
+        public ReservedRoom GetById(int reservationId, int roomId)
         {
-            return reservedRoomCRUD.GetById(id);
+            return reservedRoomCRUD.GetById(reservationId, roomId);
         }
     }
 }

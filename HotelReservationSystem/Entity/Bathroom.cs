@@ -10,7 +10,7 @@ namespace HotelReservationSystem.Entity
     {
         public int Id { get; set; }
         public int Floor { get; set; }
-        public bool IsShared { get; set; }
+        public string IsShared { get; set; }
 
     }
 }

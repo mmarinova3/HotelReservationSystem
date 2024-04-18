@@ -31,13 +31,13 @@
             this.searchButton = new System.Windows.Forms.Button();
             this.infoLabel = new System.Windows.Forms.Label();
             this.deleteButton = new System.Windows.Forms.Button();
-            this.editButton = new System.Windows.Forms.Button();
             this.insertButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.categoryComboBox = new System.Windows.Forms.ComboBox();
             this.bathroomComboBox = new System.Windows.Forms.ComboBox();
             this.roomTextBox = new System.Windows.Forms.TextBox();
             this.floorTextBox = new System.Windows.Forms.TextBox();
+            this.editButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,19 +70,9 @@
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
-            // editButton
-            // 
-            this.editButton.Location = new System.Drawing.Point(405, 265);
-            this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(116, 23);
-            this.editButton.TabIndex = 61;
-            this.editButton.Text = "button2";
-            this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.editButton_Click);
-            // 
             // insertButton
             // 
-            this.insertButton.Location = new System.Drawing.Point(405, 236);
+            this.insertButton.Location = new System.Drawing.Point(405, 238);
             this.insertButton.Name = "insertButton";
             this.insertButton.Size = new System.Drawing.Size(116, 23);
             this.insertButton.TabIndex = 60;
@@ -92,11 +82,15 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 32);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(334, 372);
             this.dataGridView1.TabIndex = 59;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // categoryComboBox
             // 
@@ -128,11 +122,22 @@
             this.floorTextBox.Size = new System.Drawing.Size(188, 20);
             this.floorTextBox.TabIndex = 70;
             // 
+            // editButton
+            // 
+            this.editButton.Location = new System.Drawing.Point(405, 265);
+            this.editButton.Name = "editButton";
+            this.editButton.Size = new System.Drawing.Size(116, 23);
+            this.editButton.TabIndex = 71;
+            this.editButton.Text = "button1";
+            this.editButton.UseVisualStyleBackColor = true;
+            this.editButton.Click += new System.EventHandler(this.editButton_Click);
+            // 
             // RoomForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(587, 450);
+            this.Controls.Add(this.editButton);
             this.Controls.Add(this.floorTextBox);
             this.Controls.Add(this.roomTextBox);
             this.Controls.Add(this.bathroomComboBox);
@@ -140,7 +145,6 @@
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.deleteButton);
-            this.Controls.Add(this.editButton);
             this.Controls.Add(this.insertButton);
             this.Controls.Add(this.dataGridView1);
             this.Name = "RoomForm";
@@ -156,12 +160,12 @@
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.Button deleteButton;
-        private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.Button insertButton;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ComboBox categoryComboBox;
         private System.Windows.Forms.ComboBox bathroomComboBox;
         private System.Windows.Forms.TextBox roomTextBox;
         private System.Windows.Forms.TextBox floorTextBox;
+        private System.Windows.Forms.Button editButton;
     }
 }

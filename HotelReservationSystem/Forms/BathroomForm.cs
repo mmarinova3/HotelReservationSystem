@@ -26,10 +26,9 @@ namespace HotelReservationSystem.Forms
             editButton.Text = "Edit";
             deleteButton.Text = "Delete";
             searchButton.Text = "Search";
+            checkBox1.Text = "Shared";
             infoLabel.Text = string.Empty;
-
-            isSharedComboBox.Items.Add("Yes");
-            isSharedComboBox.Items.Add("No");
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
         }
 
         public void DisplayData()
@@ -62,7 +61,7 @@ namespace HotelReservationSystem.Forms
                     return;
                 }
 
-                bool isShared = isSharedComboBox.SelectedItem?.ToString().ToLower() == "yes";
+                string isShared = checkBox1.Checked ? "True" : "False";
 
                 Bathroom bathroom = new Bathroom
                 {
@@ -86,6 +85,7 @@ namespace HotelReservationSystem.Forms
                 infoLabel.Text = $"Error: {ex.Message}";
             }
         }
+
 
 
 
@@ -122,9 +122,17 @@ namespace HotelReservationSystem.Forms
                     {
                         bathroomIdBox.Text = selectedBathroom.Id.ToString();
                         floorBox.Text = selectedBathroom.Floor.ToString();
-                        isSharedComboBox.SelectedItem = selectedBathroom.IsShared ? "Yes" : "No";
+                        checkBox1.Checked = selectedBathroom.IsShared.Equals("True", StringComparison.OrdinalIgnoreCase);
                     }
                 }
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (selectedBathroom != null)
+            {
+                selectedBathroom.IsShared = checkBox1.Checked ? "True" : "False";
             }
         }
 

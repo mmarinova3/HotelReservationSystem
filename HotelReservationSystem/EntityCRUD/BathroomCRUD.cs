@@ -38,13 +38,12 @@ namespace HotelReservationSystem.EntityCRUD
 
             foreach (DataRow row in dataTable.Rows)
             {
-                bool isShared = row["IsShared"] != DBNull.Value && Convert.ToBoolean(row["IsShared"]);
 
                 bathrooms.Add(new Bathroom
                 {
                     Id = Convert.ToInt32(row["BathroomId"]),
                     Floor = Convert.ToInt32(row["Floor"]),
-                    IsShared = isShared
+                    IsShared = Convert.ToString(row["IsShared"])
                 });
             }
 
@@ -63,13 +62,12 @@ namespace HotelReservationSystem.EntityCRUD
             if (dataTable.Rows.Count > 0)
             {
                 DataRow row = dataTable.Rows[0];
-                bool isShared = row["IsShared"] != DBNull.Value && Convert.ToBoolean(row["IsShared"]);
 
                 return new Bathroom
                 {
                     Id = Convert.ToInt32(row["BathroomId"]),
                     Floor = Convert.ToInt32(row["Floor"]),
-                    IsShared = isShared
+                    IsShared = Convert.ToString(row["IsShared"])
                 };
             }
             else
@@ -84,7 +82,7 @@ namespace HotelReservationSystem.EntityCRUD
             string query = "UPDATE Bathroom SET Floor = :floor, IsShared = :isShared WHERE BathroomId = :bathroomId";
             OracleParameter[] parameters = {
                 new OracleParameter(":floor", OracleDbType.Int32) { Value = updatedItem.Floor },
-                new OracleParameter(":isShared", OracleDbType.Int32) { Value = updatedItem.IsShared ? 1 : 0 },
+                new OracleParameter(":isShared", OracleDbType.Int32) { Value = updatedItem.IsShared },
                 new OracleParameter(":bathroomId", OracleDbType.Int32) { Value = id }
             };
             DBConnection.ExecuteQuery(query, parameters);
