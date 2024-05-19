@@ -45,7 +45,7 @@ namespace HotelReservationSystem.Forms
             List<Room> rooms = roomController.GetRooms();
             roomComboBox.DataSource = rooms;
             roomComboBox.DisplayMember = "Id";
-            roomComboBox.ValueMember = "iD";
+            roomComboBox.ValueMember = "Id";
         }
 
         private void FillReservationComboBox()

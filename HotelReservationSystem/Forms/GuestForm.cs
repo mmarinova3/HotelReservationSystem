@@ -3,6 +3,7 @@ using HotelReservationSystem.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace HotelReservationSystem.Forms
@@ -56,7 +57,7 @@ namespace HotelReservationSystem.Forms
 
             foreach (var guest in guests)
             {
-                dataGridView1.Rows.Add(guest.EGN, guest.Name, guest.City.Id, guest.Address, guest.MobileNumber);
+                dataGridView1.Rows.Add(guest.EGN, guest.Name, guest.City.CityName, guest.Address, guest.MobileNumber);
             }
         }
 
@@ -89,9 +90,10 @@ namespace HotelReservationSystem.Forms
 
             if (!string.IsNullOrWhiteSpace(nameBox.Text))
             {
-                if (!char.IsUpper(nameBox.Text[0]) || !nameBox.Text.All(char.IsLetter))
+                string namePattern = @"^[A-Z][a-z]*(?:[ -][A-Z][a-z]*)*$";
+                if (string.IsNullOrWhiteSpace(nameBox.Text) || !Regex.IsMatch(nameBox.Text, namePattern))
                 {
-                    infoLabel.Text = "Name must start with an uppercase letter and contain only letters.";
+                    infoLabel.Text = "Name must start with an uppercase letter, contain only letters, spaces or hyphens, and each word must start with an uppercase letter.";
                     return false;
                 }
             }
@@ -109,8 +111,15 @@ namespace HotelReservationSystem.Forms
 
             return true;
         }
+
         private void insertButton_Click(object sender, EventArgs e)
         {
+            if (guestController.GetById(egnBox.Text) != null)
+            {
+                infoLabel.Text = "The guest is already in the system";
+                return;
+            }
+
             if (ValidateGuestInfo())
             {
                 City selectedCity = (City)cityComboBox.SelectedItem;
@@ -135,8 +144,6 @@ namespace HotelReservationSystem.Forms
                 }
             }
         }
-
-
 
 
         private void editButton_Click(object sender, EventArgs e)

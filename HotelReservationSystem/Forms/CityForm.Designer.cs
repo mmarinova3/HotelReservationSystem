@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.oracleCommandBuilder1 = new Oracle.ManagedDataAccess.Client.OracleCommandBuilder();
             this.cityNameBox = new System.Windows.Forms.TextBox();
             this.insertButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
@@ -50,11 +49,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(181, 309);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // oracleCommandBuilder1
-            // 
-            this.oracleCommandBuilder1.CatalogLocation = System.Data.Common.CatalogLocation.End;
-            this.oracleCommandBuilder1.CatalogSeparator = "@";
             // 
             // cityNameBox
             // 
@@ -135,7 +129,6 @@
 
         #endregion
         private System.Windows.Forms.DataGridView dataGridView1;
-        private Oracle.ManagedDataAccess.Client.OracleCommandBuilder oracleCommandBuilder1;
         private System.Windows.Forms.TextBox cityNameBox;
         private System.Windows.Forms.Button insertButton;
         private System.Windows.Forms.Button editButton;

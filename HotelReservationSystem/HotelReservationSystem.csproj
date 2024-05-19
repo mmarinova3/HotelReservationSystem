@@ -89,6 +89,7 @@
     <Compile Include="Controller\GuestController.cs" />
     <Compile Include="Controller\ReservationController.cs" />
     <Compile Include="Controller\ReservedRoomController.cs" />
+    <Compile Include="Controller\RoleController.cs" />
     <Compile Include="Controller\RoomCategoryController.cs" />
     <Compile Include="Controller\RoomController.cs" />
     <Compile Include="Controller\UserController.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="EntityCRUD\GuestCRUD.cs" />
     <Compile Include="EntityCRUD\ReservationCRUD.cs" />
     <Compile Include="EntityCRUD\ReservedRoomCRUD.cs" />
+    <Compile Include="EntityCRUD\RoleCRUD.cs" />
     <Compile Include="EntityCRUD\RoomCategoryCRUD.cs" />
     <Compile Include="EntityCRUD\RoomCRUD.cs" />
     <Compile Include="EntityCRUD\UserCRUD.cs" />
@@ -108,20 +110,25 @@
     <Compile Include="Entity\Guest.cs" />
     <Compile Include="Entity\Reservation.cs" />
     <Compile Include="Entity\ReservedRoom.cs" />
+    <Compile Include="Entity\Role.cs" />
     <Compile Include="Entity\Room.cs" />
     <Compile Include="Entity\RoomCategory.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Forms\BathroomForm.cs">
       <SubType>Form</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Forms\BathroomForm.Designer.cs">
       <DependentUpon>BathroomForm.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Forms\CityForm.cs">
       <SubType>Form</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Forms\CityForm.Designer.cs">
       <DependentUpon>CityForm.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Forms\EmployeeForm.cs">
       <SubType>Form</SubType>
@@ -143,15 +150,23 @@
     </Compile>
     <Compile Include="Forms\MainViewForm.cs">
       <SubType>Form</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Forms\MainViewForm.Designer.cs">
       <DependentUpon>MainViewForm.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Forms\ReservationForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ReservationForm.Designer.cs">
       <DependentUpon>ReservationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ReservationRoomGuest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ReservationRoomGuest.Designer.cs">
+      <DependentUpon>ReservationRoomGuest.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ReservedRoomForm.cs">
       <SubType>Form</SubType>
@@ -187,9 +202,11 @@
     <Compile Include="Utils\DBConnection.cs" />
     <EmbeddedResource Include="Forms\BathroomForm.resx">
       <DependentUpon>BathroomForm.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CityForm.resx">
       <DependentUpon>CityForm.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EmployeeForm.resx">
       <DependentUpon>EmployeeForm.cs</DependentUpon>
@@ -202,9 +219,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainViewForm.resx">
       <DependentUpon>MainViewForm.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ReservationForm.resx">
       <DependentUpon>ReservationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ReservationRoomGuest.resx">
+      <DependentUpon>ReservationRoomGuest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ReservedRoomForm.resx">
       <DependentUpon>ReservedRoomForm.cs</DependentUpon>

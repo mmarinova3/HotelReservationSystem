@@ -11,10 +11,11 @@ namespace HotelReservationSystem.EntityCRUD
     {
         public void Create(User item)
         {
-            string query = "INSERT INTO Sysuser (Username, UserPassword) VALUES (:username, :password)";
+            string query = "INSERT INTO Sysuser (Username, UserPassword, RoleId) VALUES (:username, :password, :roleId)";
             OracleParameter[] parameters = {
                 new OracleParameter(":username", OracleDbType.Varchar2) { Value = item.Username },
-                new OracleParameter(":password", OracleDbType.Varchar2) { Value = item.Password }
+                new OracleParameter(":password", OracleDbType.Varchar2) { Value = item.Password },
+                new OracleParameter(":roleId", OracleDbType.Varchar2) { Value = item.role.Id }
             };
             DBConnection.ExecuteQuery(query, parameters);
         }
@@ -59,17 +60,17 @@ namespace HotelReservationSystem.EntityCRUD
             {
                 DataRow row = dataTable.Rows[0];
 
-                int employeeId = Convert.ToInt32(row["EmployeeId"]);
+                int roleId = Convert.ToInt32(row["RoleId"]);
 
-                EmployeeCRUD employeeCRUD = new EmployeeCRUD();
+                RoleCRUD roleCRUD = new RoleCRUD();
 
-                Employee employee = employeeCRUD.GetById(employeeId);
+                Role role = roleCRUD.GetById(roleId);
 
                 return new User
                 {
                     Username = row["Username"].ToString(),
                     Password = row["UserPassword"].ToString(),
-                    Employee = employee
+                    role = role
                 };
             }
             else

@@ -66,5 +66,10 @@ namespace HotelReservationSystem.Controller
         {
             return reservationCRUD.GetById(id);
         }
+
+        public Reservation GetLastAddedReservation()
+        {
+            return reservationCRUD.GetLastAddedReservation();
+        }
     }
 }

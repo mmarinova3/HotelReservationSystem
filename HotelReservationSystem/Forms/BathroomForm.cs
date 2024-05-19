@@ -87,27 +87,88 @@ namespace HotelReservationSystem.Forms
         }
 
 
-
-
-
-
-
-
         private void editButton_Click(object sender, EventArgs e)
         {
+            if (selectedBathroom != null)
+            {
+                selectedBathroom.Id = int.Parse(bathroomIdBox.Text);
+                selectedBathroom.Floor = int.Parse(floorBox.Text);
+                selectedBathroom.IsShared = checkBox1.Checked ? "True" : "False";
+
+                if (bathroomController.UpdateBathroom(selectedBathroom.Id, selectedBathroom))
+                {
+                    MessageBox.Show("Bathroom updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    DisplayData();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to update Bathroom.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Please select a Bathroom to edit.", "No Room Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
+            if (selectedBathroom == null)
+            {
+                infoLabel.Text = "Please select a Bathroom to delete.";
+                return;
+            }
 
+            if (bathroomController.DeleteBathroom(selectedBathroom.Id))
+            {
+                infoLabel.Text = "Bathroom deleted successfully.";
+                DisplayData();
+            }
+            else
+            {
+                infoLabel.Text = "Failed to delete Bathroom.";
+            }
         }
-
         private void searchButton_Click(object sender, EventArgs e)
         {
+            string bathroomNumberText = bathroomIdBox.Text.Trim();
 
+            if (string.IsNullOrWhiteSpace(bathroomNumberText))
+            {
+                infoLabel.Text = "Bathroom Number cannot be empty.";
+                return;
+            }
+
+            if (!int.TryParse(bathroomNumberText, out int bathroomNumber))
+            {
+                infoLabel.Text = "Invalid bathroom number format.";
+                return;
+            }
+
+            Bathroom bathroom = bathroomController.SearchBathroomById(bathroomNumber);
+
+            if (bathroom != null)
+            {
+                infoLabel.Text = $"Bathroom found: {bathroom.Id}";
+                selectedBathroom = bathroom;
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (Convert.ToInt32(row.Cells["Id"].Value) == bathroom.Id)
+                    {
+                        row.Selected = true;
+                        dataGridView1.CurrentCell = row.Cells[0];
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                infoLabel.Text = "Bathroom not found.";
+            }
         }
-
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

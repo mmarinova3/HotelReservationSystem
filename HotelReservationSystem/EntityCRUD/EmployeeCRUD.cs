@@ -11,10 +11,11 @@ namespace HotelReservationSystem.EntityCRUD
     {
         public void Create(Employee item)
         {
-            string query = "INSERT INTO Employee (FullName, MobileNumber) VALUES (:name, :mobileNumber)";
+            string query = "INSERT INTO Employee (FullName, MobileNumber) VALUES (:name, :mobileNumber, :EGN)";
             OracleParameter[] parameters = {
                 new OracleParameter(":name", OracleDbType.Varchar2) { Value = item.Name },
-                new OracleParameter(":mobileNumber", OracleDbType.Varchar2) { Value = item.MobileNumber }
+                new OracleParameter(":mobileNumber", OracleDbType.Varchar2) { Value = item.MobileNumber },
+                new OracleParameter(":EGN", OracleDbType.Varchar2) { Value = item.EGN }
             };
 
             DBConnection.ExecuteQuery(query, parameters);
@@ -42,7 +43,8 @@ namespace HotelReservationSystem.EntityCRUD
                 {
                     Id = Convert.ToInt32(row["EmployeeId"]),
                     Name = Convert.ToString(row["FullName"]),
-                    MobileNumber = Convert.ToString(row["MobileNumber"])
+                    MobileNumber = Convert.ToString(row["MobileNumber"]),
+                    EGN = Convert.ToString(row["EGN"])
                 });
             }
 

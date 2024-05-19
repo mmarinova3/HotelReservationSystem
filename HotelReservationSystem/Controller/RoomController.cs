@@ -8,65 +8,73 @@ namespace HotelReservationSystem.Controller
 {
     public class RoomController
     {
-            RoomCRUD roomCRUD;
-            public RoomController()
+        RoomCRUD roomCRUD;
+        public RoomController()
+        {
+            roomCRUD = new RoomCRUD();
+        }
+
+        public List<Room> GetRooms()
+        {
+            List<Room> list = (List<Room>)roomCRUD.GetAll();
+            return list;
+        }
+
+        public bool Save(Room room)
+        {
+            try
             {
-                roomCRUD = new RoomCRUD();
+                roomCRUD.Create(room);
+                return true;
             }
-
-            public List<Room> GetRooms()
+            catch (Exception ex)
             {
-                List<Room> list = (List<Room>)roomCRUD.GetAll();
-                return list;
-            }
-
-            public bool Save(Room room)
-            {
-                try
-                {
-                    roomCRUD.Create(room);
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error saving Room: {ex.Message}");
-                    return false;
-                }
-            }
-
-            public bool Update(int id, Room updatedRoom)
-            {
-                try
-                {
-                    roomCRUD.Update(id, updatedRoom);
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error updating Room: {ex.Message}");
-                    return false;
-                }
-            }
-
-            public bool Delete(int id)
-            {
-                try
-                {
-                    roomCRUD.Delete(id);
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error deleting Room: {ex.Message}");
-                    return false;
-                }
-            }
-
-
-
-            public Room GetById(int id)
-            {
-                return roomCRUD.GetById(id);
+                Console.WriteLine($"Error saving Room: {ex.Message}");
+                return false;
             }
         }
+
+        public bool Update(int id, Room updatedRoom)
+        {
+            try
+            {
+                roomCRUD.Update(id, updatedRoom);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating Room: {ex.Message}");
+                return false;
+            }
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                roomCRUD.Delete(id);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting Room: {ex.Message}");
+                return false;
+            }
+        }
+
+        public Room GetById(int id)
+        {
+            return roomCRUD.GetById(id);
+        }
+
+        public List<Room> GetAvailableRooms(DateTime startDate, DateTime endDate, int roomCategoryId, string isShared)
+        {
+            return roomCRUD.GetAvailableRooms(startDate, endDate, roomCategoryId, isShared);
+        }
+
+        public List<Room> GetAvailableRoomsForPeriod(DateTime startDate, DateTime endDate)
+        {
+            return roomCRUD.GetAvailableRoomsForPeriod(startDate, endDate);
+        }
+    }
 }

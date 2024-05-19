@@ -150,9 +150,6 @@ namespace HotelReservationSystem.Forms
             }
         }
 
-
-
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.RowIndex < dataGridView1.Rows.Count)

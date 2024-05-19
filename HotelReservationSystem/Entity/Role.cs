@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace HotelReservationSystem.Entity
 {
-    public class User
+    public class Role
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public Role role { get; set; }
+        public int Id { get; set; }
+        public string RoleName { get; set; }
+      
     }
 }

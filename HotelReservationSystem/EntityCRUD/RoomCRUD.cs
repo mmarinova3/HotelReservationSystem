@@ -90,5 +90,96 @@ namespace HotelReservationSystem.EntityCRUD
 
             DBConnection.ExecuteQuery(query, parameters);
         }
+
+        public List<Room> GetAvailableRooms(DateTime startDate, DateTime endDate, int roomCategoryId, string isShared)
+        {
+        string ConnectionString = @"Data Source=localhost:1521/xe;Persist Security Info=True;User ID=TSPHotel;Password=12345";
+
+        List<Room> availableRooms = new List<Room>();
+
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConnectionString))
+                {
+                    using (OracleCommand command = new OracleCommand("GetAvailableRooms", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.Add("startDate", OracleDbType.Date).Value = startDate.Date;
+                        command.Parameters.Add("endDate", OracleDbType.Date).Value = endDate.Date;
+                        command.Parameters.Add("roomCategoryId", OracleDbType.Int32).Value = roomCategoryId;
+                        command.Parameters.Add("isShared", OracleDbType.Varchar2).Value = isShared;
+                        command.Parameters.Add("availableRooms", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+
+                        connection.Open();
+
+                        using (OracleDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                availableRooms.Add(new Room
+                                {
+                                    Id = Convert.ToInt32(reader["RoomId"]),
+                                    Floor = Convert.ToInt32(reader["Floor"]),
+                                    RoomCategory = new RoomCategory { Name = reader["CategoryName"].ToString() },
+                                    Bathroom = new Bathroom { IsShared = reader["IsShared"].ToString() }
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
+
+            return availableRooms;
+        }
+
+        public List<Room> GetAvailableRoomsForPeriod(DateTime startDate, DateTime endDate)
+        {
+            string ConnectionString = @"Data Source=localhost:1521/xe;Persist Security Info=True;User ID=TSPHotel;Password=12345";
+
+            List<Room> availableRooms = new List<Room>();
+
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(ConnectionString))
+                {
+                    using (OracleCommand command = new OracleCommand("GetAvailableRoomsForPeriod", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.Add("startDate", OracleDbType.Date).Value = startDate.Date;
+                        command.Parameters.Add("endDate", OracleDbType.Date).Value = endDate.Date;
+                        command.Parameters.Add("availableRooms", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+
+                        connection.Open();
+
+                        using (OracleDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                availableRooms.Add(new Room
+                                {
+                                    Id = Convert.ToInt32(reader["RoomId"]),
+                                    Floor = Convert.ToInt32(reader["Floor"]),
+                                    RoomCategory = new RoomCategory { Name = reader["CategoryName"].ToString() },
+                                    Bathroom = new Bathroom { IsShared = reader["IsShared"].ToString() }
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
+
+            return availableRooms;
+        }
+
     }
 }

@@ -11,7 +11,7 @@ namespace HotelReservationSystem.EntityCRUD
     {
         public void Create(Guest item)
         {
-            string query = "INSERT INTO Guest (EGN, Name, CityId, Address, MobileNumber) VALUES (:egn, :name, :cityId, :address, :mobileNumber)";
+            string query = "INSERT INTO Guest (EGN, FullName, CityId, Address, MobileNumber) VALUES (:egn, :name, :cityId, :address, :mobileNumber)";
             OracleParameter[] parameters = {
                 new OracleParameter(":egn", OracleDbType.Varchar2) { Value = item.EGN },
                 new OracleParameter(":name", OracleDbType.Varchar2) { Value = item.Name },

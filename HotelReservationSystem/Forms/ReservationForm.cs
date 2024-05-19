@@ -71,7 +71,7 @@ namespace HotelReservationSystem.Forms
                         egnComboBox.SelectedValue = selectedReservation.Guest.EGN;
                         employeeComboBox.SelectedValue = selectedReservation.Employee.Id;
                         dateTimePicker1.Value = selectedReservation.ReservationDate;
-                        guestNumberBox.Text = selectedReservation.GuestNumber.ToString();
+                        guestNumberBox.Text = selectedReservation.AdultsNumber.ToString();
                     }
                 }
             }
@@ -87,7 +87,7 @@ namespace HotelReservationSystem.Forms
                 Guest = selectedGuest,
                 Employee = selectedEmployee,
                 ReservationDate = dateTimePicker1.Value,
-                GuestNumber = int.Parse(guestNumberBox.Text)
+                AdultsNumber = int.Parse(guestNumberBox.Text)
             };
 
             if (reservationController.Save(newReservation))
@@ -109,7 +109,7 @@ namespace HotelReservationSystem.Forms
                 selectedReservation.Guest = (Guest)egnComboBox.SelectedItem;
                 selectedReservation.Employee = (Employee)employeeComboBox.SelectedItem;
                 selectedReservation.ReservationDate = dateTimePicker1.Value;
-                selectedReservation.GuestNumber = int.Parse(guestNumberBox.Text);
+                selectedReservation.AdultsNumber = int.Parse(guestNumberBox.Text);
 
                 if (reservationController.Update(selectedReservation.Id, selectedReservation))
                 {
