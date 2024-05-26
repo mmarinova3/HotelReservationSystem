@@ -26,7 +26,7 @@ namespace HotelReservationSystem.Forms
 
         private void UserForm_Load(object sender, EventArgs e)
         {
-            insertButton.Text = "Insert";
+             insertButton.Text = "Insert";
             editButton.Text = "Edit";
             deleteButton.Text = "Delete";
             searchButton.Text = "Search";
@@ -36,8 +36,24 @@ namespace HotelReservationSystem.Forms
 
         public void DisplayData()
         {
-            dataGridView1.DataSource = userController.GetUsers();
+            if (userController != null)
+            {
+                var users = userController.GetUsers();
+                dataGridView1.Rows.Clear();
+                dataGridView1.Columns.Clear();
+                dataGridView1.Columns.Add("Username", "Username");
+                dataGridView1.Columns.Add("Password", "Password");
+                dataGridView1.Columns.Add("role", "Role");
 
+                foreach (var user in users)
+                {
+                    dataGridView1.Rows.Add(user.Username, user.Password);
+                }
+            }
+            else
+            {
+                Console.WriteLine("UserController is null.");
+            }
         }
 
         private void insertButton_Click(object sender, EventArgs e)

@@ -58,7 +58,24 @@ namespace HotelReservationSystem.Forms
 
         public void DisplayData()
         {
-            dataGridView1.DataSource = reservedRoomController.GetReservedRooms();
+            if (reservedRoomController != null)
+            {
+                var reservedRooms = reservedRoomController.GetReservedRooms();
+                dataGridView1.Columns.Clear();
+                dataGridView1.Columns.Add("Reservation", "Reservation ID");
+                dataGridView1.Columns.Add("Room", "Room Number");
+                dataGridView1.Columns.Add("StartDate", "Check-in");
+                dataGridView1.Columns.Add("EndDate", "Check-out");
+
+                foreach (var reservedRoom in reservedRooms)
+                {
+                    dataGridView1.Rows.Add(reservedRoom.Reservation.Id,reservedRoom.Room.Id,reservedRoom.StartDate,reservedRoom.EndDate);
+                }
+            }
+            else
+            {
+                Console.WriteLine("ReservedRoomController is null.");
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

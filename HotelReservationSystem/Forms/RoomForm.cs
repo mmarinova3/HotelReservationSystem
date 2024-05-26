@@ -53,11 +53,22 @@ namespace HotelReservationSystem.Forms
         {
             if (roomController != null)
             {
-                dataGridView1.DataSource = roomController.GetRooms();
+                var rooms = roomController.GetRooms();
+                dataGridView1.Rows.Clear();
+                dataGridView1.Columns.Clear();
+                dataGridView1.Columns.Add("Id", "Room Number");
+                dataGridView1.Columns.Add("Floor", "Floor");
+                dataGridView1.Columns.Add("RoomCategory", "Category Type");
+                dataGridView1.Columns.Add("Bathroom", "Bathroom (is shared?)");
+
+                foreach (var room in rooms)
+                {
+                    dataGridView1.Rows.Add(room.Id, room.Floor, room.RoomCategory.Name, room.Bathroom.IsShared);
+                }
             }
             else
             {
-                Console.WriteLine("roomController is null.");
+                Console.WriteLine("RoomController is null.");
             }
         }
 

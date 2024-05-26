@@ -44,20 +44,23 @@ namespace HotelReservationSystem.Forms
 
         public void DisplayData()
         {
-            var guests = guestController.GetGuests(); 
-
-            dataGridView1.Columns.Clear();
-
-    
-            dataGridView1.Columns.Add("EGN", "EGN");
-            dataGridView1.Columns.Add("Name", "Name");
-            dataGridView1.Columns.Add("CityName", "City");
-            dataGridView1.Columns.Add("Address", "Address");
-            dataGridView1.Columns.Add("MobileNumber", "Mobile Number");
-
-            foreach (var guest in guests)
+            if (guestController != null)
             {
-                dataGridView1.Rows.Add(guest.EGN, guest.Name, guest.City.CityName, guest.Address, guest.MobileNumber);
+                var guests = guestController.GetGuests(); dataGridView1.Columns.Clear();
+                dataGridView1.Columns.Add("EGN", "EGN");
+                dataGridView1.Columns.Add("Name", "Name");
+                dataGridView1.Columns.Add("CityName", "City");
+                dataGridView1.Columns.Add("Address", "Address");
+                dataGridView1.Columns.Add("MobileNumber", "Mobile Number");
+
+                foreach (var guest in guests)
+                {
+                    dataGridView1.Rows.Add(guest.EGN, guest.Name, guest.City.CityName, guest.Address, guest.MobileNumber);
+                }
+            }
+            else
+            {
+                Console.WriteLine("GuestController is null.");
             }
         }
 

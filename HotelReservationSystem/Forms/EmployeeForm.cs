@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -37,8 +38,25 @@ namespace HotelReservationSystem.Forms
 
         public void DisplayData()
         {
-            dataGridView1.DataSource = employeeController.GetEmployees();
+            if (employeeController != null)
+            {
+                var employees = employeeController.GetEmployees();
+                dataGridView1.Columns.Clear();
+                dataGridView1.Columns.Add("Id", "Id");
+                dataGridView1.Columns.Add("Name", "Name");
+                dataGridView1.Columns.Add("EGN", "EGN");
+                dataGridView1.Columns.Add("MobileNumber", "Mobile Number");
 
+                foreach (var employee in employees)
+                {
+                    dataGridView1.Rows.Add(employee.Id,employee.Name,employee.EGN,employee.MobileNumber);
+                }
+                dataGridView1.Columns["Id"].Visible = false;
+            }
+            else
+            {
+                Console.WriteLine("EmployeeController is null.");
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -213,7 +231,7 @@ namespace HotelReservationSystem.Forms
                 {
                     dataGridView1.ClearSelection();
                     dataGridView1.Rows[rowIndex].Selected = true;
-                    dataGridView1.CurrentCell = dataGridView1.Rows[rowIndex].Cells[0];
+                    dataGridView1.CurrentCell = dataGridView1.Rows[rowIndex].Cells[2];
                     dataGridView1.FirstDisplayedScrollingRowIndex = rowIndex;
                     infoLabel.Text = "Employee found and selected in the list.";
                 }

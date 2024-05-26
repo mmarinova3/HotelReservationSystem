@@ -29,8 +29,23 @@ namespace HotelReservationSystem.Forms
 
         public void DisplayData()
         {
-            dataGridView1.DataSource = cityController.GetCities();
-
+            if (cityController != null)
+            {
+                var cities = cityController.GetCities();
+                dataGridView1.Rows.Clear();
+                dataGridView1.Columns.Clear();
+                dataGridView1.Columns.Add("Id", "Id");
+                dataGridView1.Columns.Add("CityName", "Name");
+                foreach (var city in cities)
+                {
+                    dataGridView1.Rows.Add(city.Id, city.CityName);
+                }
+                dataGridView1.Columns["Id"].Visible = false; 
+            }
+            else
+            {
+                Console.WriteLine("CityController is null.");
+            }
         }
 
         private void InsertButton_Click(object sender, EventArgs e)
@@ -139,7 +154,7 @@ namespace HotelReservationSystem.Forms
                     if ((int)row.Cells["Id"].Value == city.Id)
                     {
                         row.Selected = true;
-                        dataGridView1.CurrentCell = row.Cells[0];
+                        dataGridView1.CurrentCell = row.Cells[1];
                         break;
                     }
                 }

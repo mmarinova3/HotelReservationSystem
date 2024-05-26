@@ -38,7 +38,27 @@ namespace HotelReservationSystem.Forms
 
         public void DisplayData()
         {
-            dataGridView1.DataSource = reservationController.GetReservations();
+            if (reservationController != null)
+            {
+                var reservations = reservationController.GetReservations(); 
+                dataGridView1.Columns.Clear();
+                dataGridView1.Columns.Add("Id", "Reservation ID");
+                dataGridView1.Columns.Add("Guest", "Guest EGN");
+                dataGridView1.Columns.Add("Employee", "Employee");
+                dataGridView1.Columns.Add("ReservationDate", "Date");
+                dataGridView1.Columns.Add("AdultsNumber", "Adults");
+                dataGridView1.Columns.Add("ChildrenNumber", "Children");
+                dataGridView1.Columns.Add("Note", "Note");
+
+                foreach (var reservation in reservations)
+                {
+                    dataGridView1.Rows.Add(reservation.Id,reservation.Guest.EGN,reservation.Employee.Name,reservation.ReservationDate,reservation.AdultsNumber,reservation.ChildrenNumber,reservation.Note);
+                }
+            }
+            else
+            {
+                Console.WriteLine("ReservationController is null.");
+            }
         }
 
         private void FillGuestComboBox()

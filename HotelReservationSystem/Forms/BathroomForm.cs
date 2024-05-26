@@ -33,8 +33,23 @@ namespace HotelReservationSystem.Forms
 
         public void DisplayData()
         {
-            dataGridView1.DataSource = bathroomController.GetBathrooms();
+            if (bathroomController != null)
+            {
+                var bathrooms = bathroomController.GetBathrooms();
+                dataGridView1.Columns.Clear();
+                dataGridView1.Columns.Add("Id", "Bathroom Number");
+                dataGridView1.Columns.Add("Floor", "Floor");
+                dataGridView1.Columns.Add("BathroomId", "Bathroom (shared?)");
 
+                foreach (var bathroom in bathrooms)
+                {
+                    dataGridView1.Rows.Add(bathroom.Id, bathroom.Floor, bathroom.IsShared);
+                }
+            }
+            else
+            {
+                Console.WriteLine("BathroomController is null.");
+            }
         }
 
         private void insertButton_Click(object sender, EventArgs e)

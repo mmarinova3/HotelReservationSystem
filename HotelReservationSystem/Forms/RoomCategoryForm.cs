@@ -38,8 +38,25 @@ namespace HotelReservationSystem.Forms
 
         public void DisplayData()
         {
-            dataGridView1.DataSource = roomCategoryController.GetCategories();
+            if (roomCategoryController != null)
+            {
+                var roomCategories = roomCategoryController.GetCategories();
+                dataGridView1.Rows.Clear();
+                dataGridView1.Columns.Clear();
+                dataGridView1.Columns.Add("Id", "Id");
+                dataGridView1.Columns.Add("Name", "Category Type");
+                dataGridView1.Columns.Add("MaxCapacity", "Max Capacity");
 
+                foreach (var roomCategory in roomCategories)
+                {
+                    dataGridView1.Rows.Add(roomCategory.Id, roomCategory.Name,roomCategory.MaxCapacity);
+                }
+                dataGridView1.Columns["Id"].Visible = false;
+            }
+            else
+            {
+                Console.WriteLine("RoomCategoryController is null.");
+            }
         }
 
         private void insertButton_Click(object sender, EventArgs e)
